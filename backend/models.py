@@ -13,7 +13,7 @@ class User(Base):
     age: Mapped[int] = mapped_column(Integer, nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
-    posts: Mapped[list[Post]] = relationship(back_populates="author")
+    posts: Mapped[list[Post]] = relationship(back_populates="author", cascade="all, delete-orphan")
     
 
 class Post(Base):
